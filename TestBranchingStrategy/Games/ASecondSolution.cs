@@ -24,6 +24,5 @@ namespace TestBranchingStrategy.Games
 
             return NewBoard;
         }
-
     }
 }
