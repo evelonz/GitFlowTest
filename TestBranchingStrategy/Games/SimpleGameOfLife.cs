@@ -42,12 +42,6 @@ namespace TestBranchingStrategy.Games
 
             return NewBoard;
         }
-
-        public string Test(HashSet<(int x, int y)>board)
-        {
-            return String.Join(" : ", board);
-        }
-
         
     }
 }

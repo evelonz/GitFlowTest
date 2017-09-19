@@ -20,9 +20,7 @@ namespace TestBranchingStrategy
                 CurrentSet = SimpleGame.Move(CurrentSet, NeighborFactory);
             }
 
-            var GameResult = SimpleGame.Test(CurrentSet);
-
-            Console.WriteLine("Simple Game: " + GameResult);
+            Console.WriteLine("Simple Game: " + FormatResylt(CurrentSet));
 
             CurrentSet = StartBoard;
             var SecondGame = new ASecondSolution();
@@ -31,11 +29,14 @@ namespace TestBranchingStrategy
                 CurrentSet = SecondGame.Move(CurrentSet, NeighborFactory);
             }
 
-            var GameResult2 = String.Join(" : ", CurrentSet);
-
-            Console.WriteLine("Second Game: " + GameResult2);
+            Console.WriteLine("Second Game: " + FormatResylt(CurrentSet));
 
             Console.ReadKey();
+        }
+
+        private static string FormatResylt(HashSet<(int, int)> set)
+        {
+            return String.Join(" : ", set);
         }
     }
 }
