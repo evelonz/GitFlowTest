@@ -10,26 +10,27 @@ namespace TestBranchingStrategy
         {
             Console.WriteLine("Hello, Conway's Game of Life!");
 
-            var SimpleGlider = new (int, int)[] { (0, 0), (1, 0), (2, 0), (0, 1), (1, 2) };
+            var StartBoard = new HashSet<(int, int)>() { (0, 0), (1, 0), (2, 0), (0, 1), (1, 2) };
 
-            var SimpleGame = new SimpleGameOfLife(SimpleGlider);
-
+            var CurrentSet = StartBoard;
+            var SimpleGame = new SimpleGameOfLife();
             for (int i = 0; i < 10; i++)
             {
-                SimpleGame.Move();
+                CurrentSet = SimpleGame.Move(CurrentSet);
             }
 
-            var GameResult = SimpleGame.Test();
+            var GameResult = SimpleGame.Test(CurrentSet);
 
             Console.WriteLine("Simple Game: " + GameResult);
 
-            var set = new HashSet<(int, int)>() { (0, 0), (1, 0), (2, 0), (0, 1), (1, 2) };
+            CurrentSet = StartBoard;
+            var SecondGame = new ASecondSolution();
             for (int i = 0; i < 10; i++)
             {
-                set = ASecondSolution.Move(set);
+                CurrentSet = SecondGame.Move(CurrentSet);
             }
 
-            var GameResult2 = String.Join(" : ", set);
+            var GameResult2 = String.Join(" : ", CurrentSet);
 
             Console.WriteLine("Second Game: " + GameResult2);
 

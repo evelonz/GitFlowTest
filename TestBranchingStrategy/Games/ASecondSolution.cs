@@ -5,9 +5,9 @@ using System.Text;
 
 namespace TestBranchingStrategy.Games
 {
-    static class ASecondSolution
+    class ASecondSolution : IGameOfLife
     {
-        public static HashSet<(int x, int y)> Move(HashSet<(int x, int y)> board)
+        public HashSet<(int x, int y)> Move(HashSet<(int x, int y)> board)
         {
             HashSet<(int x, int y)> NewBoard = new HashSet<(int x, int y)>();
             HashSet<(int x, int y)> recalc = new HashSet<(int x, int y)>(board);
