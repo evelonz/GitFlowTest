@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TestBranchingStrategy.Games;
 
 namespace TestBranchingStrategy
@@ -13,14 +14,24 @@ namespace TestBranchingStrategy
 
             var SimpleGame = new SimpleGameOfLife(SimpleGlider);
 
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 10; i++)
             {
                 SimpleGame.Move();
             }
 
             var GameResult = SimpleGame.Test();
 
-            Console.WriteLine(GameResult);
+            Console.WriteLine("Simple Game: " + GameResult);
+
+            var set = new HashSet<(int, int)>() { (0, 0), (1, 0), (2, 0), (0, 1), (1, 2) };
+            for (int i = 0; i < 10; i++)
+            {
+                set = ASecondSolution.Move(set);
+            }
+
+            var GameResult2 = String.Join(" : ", set);
+
+            Console.WriteLine("Second Game: " + GameResult2);
 
             Console.ReadKey();
         }
