@@ -16,7 +16,7 @@ namespace TestBranchingStrategy.Games
             foreach (var point in recalc)
             {
                 var Count = Neighbors(point).Sum(s => board.Contains(s) ? 1 : 0);
-                if (Count == 3 || Count == 2)
+                if (Count == 3 || (Count == 2 && board.Contains(point)))
                 {
                     NewBoard.Add(point);
                 }
