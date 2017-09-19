@@ -10,30 +10,33 @@ namespace TestBranchingStrategy
         {
             Console.WriteLine("Hello, Conway's Game of Life!");
 
-            var SimpleGlider = new (int, int)[] { (0, 0), (1, 0), (2, 0), (0, 1), (1, 2) };
+            var StartBoard = new HashSet<(int, int)>() { (0, 0), (1, 0), (2, 0), (0, 1), (1, 2) };
+            var NeighborFactory = new SimpleNeighbors();
 
-            var SimpleGame = new SimpleGameOfLife(SimpleGlider);
-
+            var CurrentSet = StartBoard;
+            var SimpleGame = new SimpleGameOfLife();
             for (int i = 0; i < 10; i++)
             {
-                SimpleGame.Move();
+                CurrentSet = SimpleGame.Move(CurrentSet, NeighborFactory);
             }
 
-            var GameResult = SimpleGame.Test();
+            Console.WriteLine("Simple Game: " + FormatResylt(CurrentSet));
 
-            Console.WriteLine("Simple Game: " + GameResult);
-
-            var set = new HashSet<(int, int)>() { (0, 0), (1, 0), (2, 0), (0, 1), (1, 2) };
+            CurrentSet = StartBoard;
+            var SecondGame = new ASecondSolution();
             for (int i = 0; i < 10; i++)
             {
-                set = ASecondSolution.Move(set);
+                CurrentSet = SecondGame.Move(CurrentSet, NeighborFactory);
             }
 
-            var GameResult2 = String.Join(" : ", set);
-
-            Console.WriteLine("Second Game: " + GameResult2);
+            Console.WriteLine("Second Game: " + FormatResylt(CurrentSet));
 
             Console.ReadKey();
+        }
+
+        private static string FormatResylt(HashSet<(int, int)> set)
+        {
+            return String.Join(" : ", set);
         }
     }
 }
