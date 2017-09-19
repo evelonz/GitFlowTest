@@ -11,12 +11,13 @@ namespace TestBranchingStrategy
             Console.WriteLine("Hello, Conway's Game of Life!");
 
             var StartBoard = new HashSet<(int, int)>() { (0, 0), (1, 0), (2, 0), (0, 1), (1, 2) };
+            var NeighborFactory = new SimpleNeighbors();
 
             var CurrentSet = StartBoard;
             var SimpleGame = new SimpleGameOfLife();
             for (int i = 0; i < 10; i++)
             {
-                CurrentSet = SimpleGame.Move(CurrentSet);
+                CurrentSet = SimpleGame.Move(CurrentSet, NeighborFactory);
             }
 
             var GameResult = SimpleGame.Test(CurrentSet);
@@ -27,7 +28,7 @@ namespace TestBranchingStrategy
             var SecondGame = new ASecondSolution();
             for (int i = 0; i < 10; i++)
             {
-                CurrentSet = SecondGame.Move(CurrentSet);
+                CurrentSet = SecondGame.Move(CurrentSet, NeighborFactory);
             }
 
             var GameResult2 = String.Join(" : ", CurrentSet);

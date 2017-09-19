@@ -6,7 +6,7 @@ namespace TestBranchingStrategy.Games
 {
     class SimpleGameOfLife : IGameOfLife
     {
-        public HashSet<(int x, int y)> Move(HashSet<(int x, int y)> board)
+        public HashSet<(int x, int y)> Move(HashSet<(int x, int y)> board, IGetNeighbors getNeighbors)
         {
             var NewBoard = new HashSet<(int, int)>();
 
@@ -14,7 +14,7 @@ namespace TestBranchingStrategy.Games
             {
                 // Check each cell if they should live or die.
                 int count = 0;
-                foreach (var neighbor in Neighbors(cell))
+                foreach (var neighbor in getNeighbors.Neighbors(cell))
                 {
                     if (board.Contains(neighbor))
                     {
@@ -24,7 +24,7 @@ namespace TestBranchingStrategy.Games
                     {
                         // Also check each dead neighbor if it should become alive.
                         int count2 = 0;
-                        foreach (var neighborsNeighbors in Neighbors(neighbor))
+                        foreach (var neighborsNeighbors in getNeighbors.Neighbors(neighbor))
                         {
                             count2 += board.Contains(neighborsNeighbors) ? 1 : 0;
                         }
@@ -41,19 +41,6 @@ namespace TestBranchingStrategy.Games
             }
 
             return NewBoard;
-        }
-
-        private IEnumerable<(int x, int y)> Neighbors((int x, int y) cell)
-        {
-            yield return (cell.x - 1, cell.y);
-            yield return (cell.x - 1, cell.y + 1);
-            yield return (cell.x - 1, cell.y - 1);
-            //yield return (cell.x  , cell.y    )); // Self!
-            yield return (cell.x, cell.y + 1);
-            yield return (cell.x, cell.y - 1);
-            yield return (cell.x + 1, cell.y);
-            yield return (cell.x + 1, cell.y + 1);
-            yield return (cell.x + 1, cell.y - 1);
         }
 
         public string Test(HashSet<(int x, int y)>board)

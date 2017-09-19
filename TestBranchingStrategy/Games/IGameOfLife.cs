@@ -6,6 +6,6 @@ namespace TestBranchingStrategy.Games
 {
     interface IGameOfLife
     {
-        HashSet<(int x, int y)> Move(HashSet<(int x, int y)> board);
+        HashSet<(int x, int y)> Move(HashSet<(int x, int y)> board, IGetNeighbors getNeighbors);
     }
 }
