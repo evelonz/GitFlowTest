@@ -4,43 +4,19 @@ using System.Text;
 
 namespace TestBranchingStrategy.Games
 {
-    class SimpleGameOfLife
+    class SimpleGameOfLife : IGameOfLife
     {
-        HashSet<(int, int)> Board { get; set; }
-
-        public SimpleGameOfLife(params (int, int)[] args)
-        {
-            Board = new HashSet<(int, int)>(args);
-        }
-
-        public bool Running()
-        {
-            return Board.Count > 0;
-        }
-
-        public IEnumerable<(int x, int y)> Neighbors((int x, int y) cell)
-        {
-            yield return (cell.x - 1, cell.y);
-            yield return (cell.x - 1, cell.y + 1);
-            yield return (cell.x - 1, cell.y - 1);
-            //yield return (cell.x  , cell.y    )); // Self!
-            yield return (cell.x, cell.y + 1);
-            yield return (cell.x, cell.y - 1);
-            yield return (cell.x + 1, cell.y);
-            yield return (cell.x + 1, cell.y + 1);
-            yield return (cell.x + 1, cell.y - 1);
-        }
-
-        public void Move()
+        public HashSet<(int x, int y)> Move(HashSet<(int x, int y)> board, IGetNeighbors getNeighbors)
         {
             var NewBoard = new HashSet<(int, int)>();
-            foreach (var cell in Board)
+
+            foreach (var cell in board)
             {
                 // Check each cell if they should live or die.
                 int count = 0;
-                foreach (var neighbor in Neighbors(cell))
+                foreach (var neighbor in getNeighbors.Neighbors(cell))
                 {
-                    if (Board.Contains(neighbor))
+                    if (board.Contains(neighbor))
                     {
                         count++;
                     }
@@ -48,9 +24,9 @@ namespace TestBranchingStrategy.Games
                     {
                         // Also check each dead neighbor if it should become alive.
                         int count2 = 0;
-                        foreach (var neighborsNeighbors in Neighbors(neighbor))
+                        foreach (var neighborsNeighbors in getNeighbors.Neighbors(neighbor))
                         {
-                            count2 += Board.Contains(neighborsNeighbors) ? 1 : 0;
+                            count2 += board.Contains(neighborsNeighbors) ? 1 : 0;
                         }
                         if (count2 == 3)
                         {
@@ -63,12 +39,9 @@ namespace TestBranchingStrategy.Games
                     NewBoard.Add(cell);
                 }
             }
-            Board = NewBoard;
-        }
 
-        public string Test()
-        {
-            return String.Join(" : ", Board);
+            return NewBoard;
         }
+        
     }
 }
