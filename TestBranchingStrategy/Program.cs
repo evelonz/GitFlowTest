@@ -7,7 +7,7 @@ namespace TestBranchingStrategy
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello Game of Life!");
+            Console.WriteLine("Hello, Conway's Game of Life!");
 
             var SimpleGlider = new (int, int)[] { (0, 0), (1, 0), (2, 0), (0, 1), (1, 2) };
 
