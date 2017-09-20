@@ -21,7 +21,7 @@ namespace TestBranchingStrategy.Games
                     NewBoard.Add(point);
                 }
             }
-
+            // Changes 2
             return NewBoard;
         }
     }
