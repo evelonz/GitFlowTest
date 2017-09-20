@@ -35,7 +35,7 @@ namespace TestBranchingStrategy.Games
             var vx = new System.Numerics.Vector<int>(cell.x);
             var vy = new System.Numerics.Vector<int>(cell.y);
 
-            // TODO: Check how we can enforce the SIMD? Who the hell leaves todoes in production code!
+            // TODO: Check how we can enforce the SIMD?
             //var t = System.Numerics.Vector.IsHardwareAccelerated;
             var xx = System.Numerics.Vector.Add<int>(vx, dx);
             var yy = System.Numerics.Vector.Add<int>(vy, dy);
