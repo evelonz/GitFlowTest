@@ -11,7 +11,7 @@ namespace TestBranchingStrategy.Games
         {
             HashSet<(int x, int y)> NewBoard = new HashSet<(int x, int y)>();
             HashSet<(int x, int y)> recalc = new HashSet<(int x, int y)>(board);
-
+            // TODO:
             board.Select(o => getNeighbors.Neighbors(o)).ToList().ForEach(e => recalc.UnionWith(e));
             foreach (var point in recalc)
             {
