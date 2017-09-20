@@ -8,7 +8,7 @@ namespace TestBranchingStrategy
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, Conway's Game of Life!");
+            Console.WriteLine("Hello, Conway's Game of Life! It is awesome.");
 
             var StartBoard = new HashSet<(int, int)>() { (0, 0), (1, 0), (2, 0), (0, 1), (1, 2) };
             IGetNeighbors NeighborFactory = new SimpleNeighbors();
